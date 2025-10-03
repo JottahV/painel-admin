@@ -43,12 +43,23 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    // COLE AQUI O SEU firebaseConfig COMPLETO
-    const firebaseConfig = { ... };
+
+    // Objeto de configuração que você copiou do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSxxxxxxxxxxxxxxxxxxxxxxx",
+      authDomain: "seu-projeto.firebaseapp.com",
+      projectId: "seu-projeto",
+      storageBucket: "seu-projeto.appspot.com",
+      messagingSenderId: "123456789012",
+      appId: "1:123456789012:web:a1b2c3d4e5f6"
+    };
+
+    // Inicializa o Firebase
     const app = initializeApp(firebaseConfig);
   </script>
 
   <script type="module" src="dashboard.js"></script>
   
 </body>
+
 </html>
