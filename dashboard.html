@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Painel Admin</title>
+</head>
+<body>
+
+  <header>
+    <h1>Painel de Controle</h1>
+    <button id="logout-button">Sair</button>
+  </header>
+
+  <main>
+    <h2>Cadastrar Novo Funcionário</h2>
+    <form id="add-employee-form">
+      <div>
+        <label for="nomeCompleto">Nome Completo:</label>
+        <input type="text" id="nomeCompleto" required>
+      </div>
+      <div>
+        <label for="numeroMatricula">Número de Matrícula:</label>
+        <input type="text" id="numeroMatricula" required>
+      </div>
+      <div>
+        <label for="cargo">Cargo:</label>
+        <select id="cargo" required>
+          <option value="Atirador">Atirador</option>
+          <option value="Monitor">Monitor</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+      <div>
+        <label for="senhaTemporaria">Senha Temporária:</label>
+        <input type="password" id="senhaTemporaria" required>
+      </div>
+      <div>
+        <button type="submit">Cadastrar Funcionário</button>
+      </div>
+    </form>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    // COLE AQUI O SEU firebaseConfig COMPLETO
+    const firebaseConfig = { ... };
+    const app = initializeApp(firebaseConfig);
+  </script>
+
+  <script type="module" src="dashboard.js"></script>
+  
+</body>
+</html>
