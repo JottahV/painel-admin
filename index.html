@@ -6,6 +6,7 @@
   <title>Painel do Administrador - Login</title>
 </head>
 <body>
+
   <main>
     <h1>Acesso ao Painel do Administrador</h1>
     <form id="login-form">
@@ -24,28 +25,19 @@
   </main>
 
   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAD4FpqCB-IC-Cp6Fz-lDEq5NsMMbf-Iy4",
-    authDomain: "controle-de-ponto-e260123.firebaseapp.com",
-    projectId: "controle-de-ponto-e260123",
-    storageBucket: "controle-de-ponto-e260123.firebasestorage.app",
-    messagingSenderId: "1055982400261",
-    appId: "1:1055982400261:web:af81ad9dfce100f3867d6c"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_AUTH_DOMAIN",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_STORAGE_BUCKET",
+      messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+      appId: "SEU_APP_ID"
+    };
+    const app = initializeApp(firebaseConfig);
   </script>
-  
-  <script **type="module"** src="script.js"></script>
+
+  <script type="module" src="script.js"></script>
+
 </body>
 </html>
-
-
-
