@@ -8,21 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const matricula = document.getElementById('matricula').value;
     const senha = document.getElementById('senha').value;
-
     const auth = getAuth();
     const email = `${matricula}@nosso-sistema.com`;
 
+    console.log("Tentando fazer login como:", email); // Diagnóstico
+
     signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        // Deu certo! O usuário conseguiu fazer o login.
+        const user = userCredential.user;
+        console.log("SUCESSO NO LOGIN! UID do usuário:", user.uid); // Diagnóstico
         alert('Login realizado com sucesso! Redirecionando...');
-        // AQUI ESTÁ A MUDANÇA:
         window.location.href = 'dashboard.html';
       })
       .catch((error) => {
-        console.error('Erro no login:', error);
+        console.error("ERRO DETALHADO NO LOGIN:", error); // Diagnóstico
         alert('Falha no login. Verifique sua matrícula e senha.');
       });
   });
 });
-
