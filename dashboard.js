@@ -1,22 +1,21 @@
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
+console.log("--- Script dashboard.js CARREGADO ---");
+
 const auth = getAuth();
 
-// Esconde o conteúdo da página para evitar que ele "pisque" na tela antes da verificação
-document.body.style.display = 'none';
+// ATENÇÃO: Desativei o redirect temporariamente para podermos ler o console!
+console.log("Segurança: Verificando status do login...");
 
-
-// --- MISSÃO 1: PROTEGER A PÁGINA (Versão Paciente) ---
 onAuthStateChanged(auth, (user) => {
+  console.log("--- Verificação de auth CONCLUÍDA ---");
   if (user) {
-    // Se o usuário ESTÁ logado, o segurança libera a entrada.
-    console.log("Usuário verificado:", user.email);
-    // Mostra o conteúdo da página
-    document.body.style.display = 'block';
+    console.log("Resultado: LOGADO. UID:", user.uid);
+    document.body.style.display = 'block'; // Mostra a página
   } else {
-    // Se o usuário NÃO ESTÁ logado, ele é "chutado" para a tela de login.
-    console.log("Nenhum usuário logado. Redirecionando...");
-    window.location.href = 'index.html';
+    console.log("Resultado: NÃO LOGADO. Usuário nulo.");
+    console.log("O segurança te mandaria para o login agora, mas o redirect está desativado para depuração.");
+    // window.location.href = 'index.html'; // DESATIVADO TEMPORARIAMENTE
   }
 });
 
@@ -45,3 +44,4 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`Preparando para cadastrar: ${nome}`);
     });
 });
+
