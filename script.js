@@ -1,30 +1,38 @@
-// Este código vai esperar a página HTML carregar completamente
-document.addEventListener('DOMContentLoaded', () => {
+// Este código precisa ser do tipo "module" para funcionar com o Firebase
+// (Não se preocupe com os detalhes disso agora)
 
-  // --- PASSO 1: Conectar com o formulário no HTML ---
-  // A gente "conversa" com o formulário do HTML através do ID dele.
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('login-form');
 
-  // --- PASSO 2: Adicionar um "escutador" para o evento de envio ---
-  // O JavaScript vai ficar "escutando" até o usuário clicar no botão "Entrar" (que é do tipo "submit").
   loginForm.addEventListener('submit', (event) => {
-    
-    // Impede o comportamento padrão do formulário, que é recarregar a página.
     event.preventDefault();
-
-    // --- PASSO 3: Pegar os valores digitados pelo usuário ---
+    
     const matricula = document.getElementById('matricula').value;
     const senha = document.getElementById('senha').value;
 
-    console.log('Matrícula digitada:', matricula);
-    console.log('Senha digitada:', senha);
+    // --- A MÁGICA ACONTECE AQUI ---
+    // Pegamos a autenticação do Firebase que foi inicializada no HTML
+    const auth = getAuth();
 
-    // --- PASSO 4: (Futuro) Enviar para o Firebase ---
-    // Por enquanto, vamos apenas mostrar um alerta para confirmar que está funcionando.
-    alert(`Tentando fazer login com a matrícula: ${matricula}`);
-    
-    // Aqui, no futuro, chamaremos a função do Firebase:
-    // firebase.auth().signInWithEmailAndPassword(...)
+    // Firebase só faz login com email, então usamos nosso truque:
+    const email = `${matricula}@nosso-sistema.com`;
+
+    // Tentamos fazer o login com a função do Firebase
+    signInWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        // Deu certo! O usuário conseguiu fazer o login.
+        const user = userCredential.user;
+        alert('Login realizado com sucesso! Bem-vindo, ' + user.displayName);
+        // No futuro, aqui nós redirecionaríamos para a tela principal do painel.
+      })
+      .catch((error) => {
+        // Deu errado! A senha pode estar errada ou o usuário não existe.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Erro no login:', errorCode, errorMessage);
+        alert('Falha no login. Verifique sua matrícula e senha.');
+      });
   });
-
 });
