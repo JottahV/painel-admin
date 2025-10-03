@@ -2,12 +2,17 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 
 const auth = getAuth();
 
-// --- MISSÃO 1: PROTEGER A PÁGINA ---
-// O Firebase vai verificar o status do login assim que a página carregar
+// Esconde o conteúdo da página para evitar que ele "pisque" na tela antes da verificação
+document.body.style.display = 'none';
+
+
+// --- MISSÃO 1: PROTEGER A PÁGINA (Versão Paciente) ---
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Se o usuário ESTÁ logado, ele pode ficar na página.
-    console.log("Usuário logado:", user.email);
+    // Se o usuário ESTÁ logado, o segurança libera a entrada.
+    console.log("Usuário verificado:", user.email);
+    // Mostra o conteúdo da página
+    document.body.style.display = 'block';
   } else {
     // Se o usuário NÃO ESTÁ logado, ele é "chutado" para a tela de login.
     console.log("Nenhum usuário logado. Redirecionando...");
@@ -15,21 +20,19 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// --- MISSÃO 2: LÓGICA DO FORMULÁRIO E LOGOUT ---
+
+// --- MISSÃO 2: LÓGICA DO FORMULÁRIO E LOGOUT (continua igual) ---
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Lógica do botão de Sair (Logout)
     const logoutButton = document.getElementById('logout-button');
     logoutButton.addEventListener('click', () => {
         signOut(auth).then(() => {
             alert('Você saiu do sistema.');
-            // O onAuthStateChanged acima vai detectar a saída e redirecionar.
         }).catch((error) => {
             console.error('Erro ao sair:', error);
         });
     });
 
-    // Lógica do formulário de cadastro (por enquanto, só mostra os dados)
     const addEmployeeForm = document.getElementById('add-employee-form');
     addEmployeeForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -40,6 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Dados do novo funcionário:', { nome, matricula, cargo, senha });
         alert(`Preparando para cadastrar: ${nome}`);
-        // Aqui, no futuro, chamaremos a função para cadastrar de verdade.
     });
 });
