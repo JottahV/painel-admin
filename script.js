@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     signInWithEmailAndPassword(auth, email, senha)
       .then((userCredential) => {
-        const user = userCredential.user;
-        alert('Login realizado com sucesso! Bem-vindo!');
+        // Deu certo! O usuário conseguiu fazer o login.
+        alert('Login realizado com sucesso! Redirecionando...');
+        // AQUI ESTÁ A MUDANÇA:
+        window.location.href = 'dashboard.html';
       })
       .catch((error) => {
         console.error('Erro no login:', error);
@@ -23,3 +25,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 });
+
