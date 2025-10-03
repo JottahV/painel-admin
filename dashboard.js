@@ -1,24 +1,18 @@
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+// Importa a autenticação do nosso arquivo central
+import { auth } from './firebase-config.js';
+// Importa as outras funções que precisamos
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-console.log("--- Script dashboard.js CARREGADO ---");
-
-const auth = getAuth();
-
-// ATENÇÃO: Desativei o redirect temporariamente para podermos ler o console!
-console.log("Segurança: Verificando status do login...");
+// A linha "const auth = getAuth()" não é mais necessária aqui.
 
 onAuthStateChanged(auth, (user) => {
-  console.log("--- Verificação de auth CONCLUÍDA ---");
   if (user) {
-    console.log("Resultado: LOGADO. UID:", user.uid);
-    document.body.style.display = 'block'; // Mostra a página
+    document.body.style.display = 'block';
   } else {
-    console.log("Resultado: NÃO LOGADO. Usuário nulo.");
-    console.log("O segurança te mandaria para o login agora, mas o redirect está desativado para depuração.");
-    // window.location.href = 'index.html'; // DESATIVADO TEMPORARIAMENTE
+    // Reativei o redirect!
+    window.location.href = 'index.html'; 
   }
 });
-
 
 // --- MISSÃO 2: LÓGICA DO FORMULÁRIO E LOGOUT (continua igual) ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,4 +38,5 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`Preparando para cadastrar: ${nome}`);
     });
 });
+
 
